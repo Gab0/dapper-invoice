@@ -21,6 +21,7 @@
 \ifthenelse{\equal{\dapper@currency}{dollar}}{\newcommand{\currencysym}{\$}}{}
 \ifthenelse{\equal{\dapper@currency}{euro}}{\newcommand{\currencysym}{\euro}}{}
 \ifthenelse{\equal{\dapper@currency}{pound}}{\newcommand{\currencysym}{\textsterling}}{}
+\ifthenelse{\equal{\dapper@currency}{sgd}}{\newcommand{\currencysym}{{\small S}\$}}{}
 
 % Set the standard geometry
 \RequirePackage[hmargin=.75in,vmargin=1in]{geometry}
@@ -111,7 +112,7 @@
 
 \newenvironment{infoSection}{\infoSectionStyle \tabular[t]{@{} r @{\hspace{0.5em}} l}}{\endtabular}
 \newcommand{\infoBox}[2]{
-    {\titleStyle #1} & \begin{minipage}[t]{.35\textwidth} #2 \end{minipage} \\
+    {\titleStyle\textbf{#1}} & \begin{minipage}[t]{.35\textwidth} #2 \end{minipage} \\
     \noalign{\addvspace{2ex}}
 }
 \newcommand{\infoSub}[2]{
@@ -126,7 +127,7 @@
 }
 
 \newcommand*{\itemizationRowStyle}[0]{\small}
-\newcommand*{\itemizationHeaderStyle}[0]{\normalsize\color{highlightColor}}
+\newcommand*{\itemizationHeaderStyle}[0]{\normalsize\color{highlightColor2}}%%\textbf}
 
 \newcounter{colskipcount}
 
@@ -134,7 +135,7 @@
     \setcounter{colskipcount}{2}
     \setlength\LTleft{0pt}
     \setlength\LTright{0pt}
-    \begin{longtable}{c @{\hspace{1.5em}} p{.6\textwidth} r}
+    \begin{longtable}{c @{\hspace{0.5em}} p{.6\textwidth} r}
     \hline
     \noalign{\smallskip}
     {\itemizationHeaderStyle Date} &
@@ -272,7 +273,7 @@
 
 \newcommand{\lineitemp}[5]{  %{Date}{Hours}{Rate}{Project}{Description}
     {\itemizationRowStyle #1} &
-    {\itemizationRowStyle #4} &
+    {\itemizationRowStyle\textbf{#4}} &
     \begin{minipage}[t]{0.5\textwidth}
         \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt] \itemizationRowStyle #5 \end{itemize}
     \end{minipage} &
@@ -319,7 +320,8 @@
 %%%%% Styles %%%%%
 
 \RequirePackage{xcolor}
-\definecolor{highlightColor}{rgb}{0.22,0.45,0.70}% light blue
+\definecolor{highlightColor}{HTML}{006D2C}% light blue
+\definecolor{highlightColor2}{HTML}{005321}
 \definecolor{subduedColor}{rgb}{0.45,0.45,0.45}% dark grey
 
 \def\headerStyle{\Huge}

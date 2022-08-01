@@ -1,49 +1,62 @@
-\documentclass[letterpaper]{dapper-invoice}
-%\documentclass[letterpaper,currency=dollar]{dapper-invoice}
+%\documentclass[letterpaper,currency=sgd]{dapper-invoice}
+\documentclass[letterpaper,currency=dollar]{dapper-invoice}
 %\documentclass[letterpaper,currency=euro]{dapper-invoice}
 %\documentclass[letterpaper,currency=pound]{dapper-invoice}
 
-\newcommand{\invoiceNo}{101}
-\newcommand{\balance}{137.50}
+
+%% TODO: Read these variables from an external file.
+\newcommand{\invoiceNo}{000}
+\newcommand{\balance}{450.00}
 \newcommand{\duein}{15}% days
 
-\newcommand{\me}{Your~Name}
-\newcommand{\clientName}{Sample~Client}
+\newcommand{\me}{Some~Company}
+\newcommand{\ownEmail}{dan@hotmail.com}
+\newcommand{\ownAddress}{211 Street st \\ City \\ PC 11115290 \\ Switzerland}
+\newcommand{\ownCompany}{Some Company}
+\newcommand{\ownContactName}{}
+\newcommand{\ownTelephone}{+33~(11)~19820-0408}
 
-\setmetadata{\me}{Your Biz}{\invoiceNo}{\clientName}
+\newcommand{\clientName}{Client~Ltd}
+\newcommand{\clientContactName}{Daniel Johns}
+\newcommand{\clientAddress}{110 Street st \\ City \\ PC 231020 \\ Singapore}
+\newcommand{\clientEmail}{client@gmail.com}
+
+\setmetadata{\me}{\ownCompany}{\invoiceNo}{\clientName}
 
 \defaultfontfeatures{ Path = ./Fonts/ }
+
 \usepackage{fontawesome}
+\usepackage{advdate}
+\AdvanceDate[0]
+
 
 \begin{document}
 
 \newfontface\mainLightItalic{OpenSans-LightItalic}
-\makeheader{Your\ \mainLightItalic Biz}{\invoiceNo}
+
+\makeheader{Some\ \mainLightItalic Company}{\invoiceNo}
 
 \twocolumnlayout{
     \begin{infoSection}
-        \infoBox{Client}{\clientName \\
-                         123 Street Address \\
-                         City, State 55555 }
-        \infoBox{Project}{\#123.456}
-        \infoBox{Contact}{Jane Smith}
-        \infoSub{\faMobilePhone}{\small\slshape +1~(555)~555-5555}
-        \infoSub{\tiny\faEnvelope}{\small\slshape \emaillink{client@example.com}}
-        \noalign{\addvspace{8ex}}
-        \infoBox{}{
+      \infoBox{Client}{\clientName \\ {\small\clientAddress}}
+      \infoBox{Contact}{\clientContactName}
+      %%\infoSub{\faMobilePhone}{\small\slshape +1~(555)~555-5555}
+      \infoSub{\tiny\faEnvelope}{\small\slshape \emaillink{\clientEmail}}
+      \noalign{\addvspace{8ex}}
+      \infoBox{}{
             {\large\raisebox{.55\height}\currencysym\huge\formatcurrency{\balance} \arrowbase} \\
             {\small\color{subduedColor} due \duedate{\duein}}
-        }
+          }
     \end{infoSection}
 }{
     \begin{infoSection}
-        \infoBox{\arrowtarget Payable To}{
+        \arrowtarget\infoBox{Payable To}{
             \me \\
-            1234 Sycamore Ave \\
-            Blacksburg, VA 24060
+            {\small\ownAddress}
         }
-        \infoSub{\faMobilePhone}{\small\slshape +1~(555)~555-5555}
-        \infoSub{\tiny\faEnvelope}{\small\slshape \emaillink{you@example.com}}
+        \infoBox{Contact}{\ownContactName}
+        \infoSub{\faMobilePhone}{\small\slshape \ownTelephone}
+        \infoSub{\tiny\faEnvelope}{\small\slshape \emaillink{\ownEmail}}
     \end{infoSection}
 }
 
@@ -53,22 +66,36 @@
 
 \begin{hoursItemizationWithProject}
 
-    \lineitemp{2015/4/11}{2}{50}{Invoice}{
-        \item Discussed requirements with client}
-
-    \lineitemp{2015/4/11}{1.25}{50}{Invoice}{
-        \item Wrote Invoice in LaTeX}
-
-    \lineitemp{2015/4/11}{0.5}{50}{Invoice}{
-        \item Packaged Invoice in .cls file}
+    \lineitemp{July 2022}{15}{15}{Project 1}{
+      \item Previously discussed extensions to the project.}
+    \lineitemp{July 2022}{15}{15}{Project 2}{
+      \item Project onboarding.
+      \item Cloud setup script elaboration.
+    }
 
     \beginsummary
 
     \summaryline{Total}{\currencysym\formatcurrency{\InvoiceTotal}}
 
-    \summaryline{Paid}{\currencysym\formatcurrency{50}}
-    \summaryline{Balance Due}{\currencysym\formatcurrency{\balance}} % not really any math support (yet)
+    %%\summaryline{Paid}{\currencysym\formatcurrency{50}}
+    %%\summaryline{Balance Due}{\currencysym\formatcurrency{\balance}} % not really any math support (yet)
 
 \end{hoursItemizationWithProject}
-
+\vspace{1em}
+\begin{flushright}
+\begin{center}
+{\hspace{14em}\color{subduedColor}\large{Bank details}}
+\end{center}
+%\vspace{.5em}
+\resizebox{25em}{!}{
+\begin{infoSection}
+  \infoBox{Bank name}{Global International Bank}
+  \infoBox{Bank code}{1114}
+  \infoBox{Branch code}{001}
+  \infoBox{SWIFT code}{GLOB11010}
+  \infoBox{Account number}{101010110}
+  \infoBox{Beneficiary name}{Some Company}
+\end{infoSection}
+}
+\end{flushright}
 \end{document}
