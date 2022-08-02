@@ -61,6 +61,8 @@
 
 \RequirePackage{fontspec}
 
+\RequirePackage{xfrac}
+
 \defaultfontfeatures{
     Ligatures = TeX,
     Path      = ./Fonts/ }
@@ -223,9 +225,9 @@
 }
 
 \newcommand*\@formatFraction[1]{
-    \ifnum\Numerator=25 ¼\fi%
-    \ifnum\Numerator=50 ½\fi%
-    \ifnum\Numerator=75 ¾\fi%
+    \ifnum\Numerator=25 \sfrac{1}{4}\fi%
+    \ifnum\Numerator=50 \sfrac{1}{2}\fi%
+    \ifnum\Numerator=75 \sfrac{3}{4}\fi%
 }
 
 \newcommand*\@formatHoursLeft[1]{
