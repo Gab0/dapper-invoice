@@ -16,7 +16,7 @@ default: pdf
 pdf: $(REPORT:%=%.pdf)
 
 .tex.pdf:
-	xelatex $* && xelatex $*
+	lualatex $* && lualatex $*
 
 watch: pdf
 	@echo watching \'$(SHOW).tex\' to run \'$(MAKE) pdf\'
